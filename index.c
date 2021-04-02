@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /*
-Program Name: Language C - Arithmetic operators.
-Goal: Understand the arithmetc operators.
-References: https://www.youtube.com/watch?v=JDkHRHxOsGU&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=8.
+Program Name: Language C - Relational and logical operators, Flow Control.
+Goal: Understand the relational and logical operators.
+References: https://www.youtube.com/watch?v=Uqx2oIExqyI&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=9.
 
 David Sotto Mayor
 */
@@ -31,17 +31,25 @@ David Sotto Mayor
 
 int main() {
 
-    /* Arithmetic operators
-    - Sum: +
-    - Subtraction: -
-    - Multiplication: *
-    - Division: /
-    - module: %
+    /* Relational operators
+    - Equality: ==
+    - Difference: !=
+    - Greater than: > 
+    - Greater than Equal: >=
+    - Less than: <
+    - Less than Equal: <=
     */
+
+    /* Logical operators
+    - Negation: !
+    - Or: ||
+    - And: &&
+    */
+
+   // To do flow control we use the if (condition) { ...code };
 
     float average, note1, note2, note3;
     float AMOUNT_NOTES = 3.0;
-    
     note1 = 7.5;
     note2 = 6.7;
     note3 = 8.3;
@@ -49,5 +57,11 @@ int main() {
     average = (note1 + note2 + note3) / AMOUNT_NOTES;
 
     printf("Notes: %.2f, %.2f, %.2f and Average: %.2f\n", average, note1, note2, note3);
+
+    if(average >= 5 && average <= 100){
+        printf("Approved!");
+    }else{
+        printf("Disapproved!");
+    }
 
 }
