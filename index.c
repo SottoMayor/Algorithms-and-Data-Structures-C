@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /*
-Program Name: Language C -  Input data with scanf command.
-Goal: Input data in our code using scanf.
-References: https://www.youtube.com/watch?v=ouwyiQfsg0Y&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=11.
+Program Name: Language C -  Loops.
+Goal: Know the loops for, while, do-while.
+References: https://www.youtube.com/watch?v=p3pAgdL00qg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=16.
 
 David Sotto Mayor
 */
@@ -31,22 +31,67 @@ David Sotto Mayor
 
 int main() {
 
-    float average, note1, note2, note3;
-    float AMOUNT_NOTES = 3.0;
+    // LOOPS!
 
-    printf("Write the note 1: ");
-    scanf("%f%*c", &note1);
-    printf("Write the note 2: ");
-    scanf("%f%*c", &note2);
-    printf("Write the note 3: ");
-    scanf("%f%*c", &note3);
+    /*
+    
+    int counter = 0; obs: this number should not necessarily start with 0, it can start with 1, 2, ...., 1000, for example.
+    int limit = k; obs: this number is arbitrary, it is our limit wich we will use to stop te loop!
+
+    //WHILE
+    while(counter < limit){
+
+        //Our loop code here...
+
+        counter++ //The counter not necessarily should be counter++, we can increment this with 
+                 //counter = counter + 3 or something like that!
+
+    };
+    
+    //DO-WHILE -> much like the previous loop, the difference is that we first execute the action then we check the condition.
+
+    do{
+
+        //Our loop code here...
+
+        counter++ //The counter not necessarily should be counter++, we can increment this with 
+                 //counter = counter + 3 or something like that!
+
+    }while(counter < limit);
+
+    //FOR -> This loop is the most used in arrays.
+
+    for(int count = 0; count < limit; count++){
+
+        //Our loop code here...
+
+    }
+
+    */
 
 
-    average = (note1 + note2 + note3) / AMOUNT_NOTES;
 
-    printf("Notes: %.2f, %.2f, %.2f and Average: %.2f\n", average, note1, note2, note3);
+    float average, note, AMOUNT_NOTES;
+    int counter = 0;
+    float accumulator = 0;
 
-    if(average >= 5 && average <= 100){
+    while (note > 0 && accumulator >= 0){
+
+        printf("Write the note: ");
+        scanf("%f%*c", &note);
+
+        if(note >= 0){
+            accumulator += note;
+            counter++;
+        };
+        
+    };
+    
+    average = accumulator / counter;
+
+    printf("Average: %.2f\n", average);
+
+    if(average >= 5){
         printf("Approved!");
     }else{
         printf("Disapproved!");
