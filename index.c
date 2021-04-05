@@ -31,70 +31,45 @@ David Sotto Mayor
 
 int main() {
 
-    // LOOPS!
+    //Exercise: make a program in c that shows all the odd numbers from 0 to 100
 
-    /*
-    
-    int counter = 0; obs: this number should not necessarily start with 0, it can start with 1, 2, ...., 1000, for example.
-    int limit = k; obs: this number is arbitrary, it is our limit wich we will use to stop te loop!
+    int counter = 0;
 
     //WHILE
-    while(counter < limit){
+    while(counter < 100){
 
-        //Our loop code here...
+        //this condition gets the odd numbers!
+        if(counter % 2 == 1){
+            printf("%d ", counter);
+        };
 
-        counter++ //The counter not necessarily should be counter++, we can increment this with 
-                 //counter = counter + 3 or something like that!
+        counter++;
 
     };
-    
-    //DO-WHILE -> much like the previous loop, the difference is that we first execute the action then we check the condition.
 
+    counter = 0;
+
+    //DO-WHILE
     do{
 
-        //Our loop code here...
-
-        counter++ //The counter not necessarily should be counter++, we can increment this with 
-                 //counter = counter + 3 or something like that!
-
-    }while(counter < limit);
-
-    //FOR -> This loop is the most used in arrays.
-
-    for(int count = 0; count < limit; count++){
-
-        //Our loop code here...
-
-    }
-
-    */
-
-
-
-    float average, note, AMOUNT_NOTES;
-    int counter = 0;
-    float accumulator = 0;
-
-    while (note > 0 && accumulator >= 0){
-
-        printf("Write the note: ");
-        scanf("%f%*c", &note);
-
-        if(note >= 0){
-            accumulator += note;
-            counter++;
+        //this condition gets the odd numbers!
+        if(counter % 2 == 1){
+            printf("%d ", counter);
         };
-        
+
+        counter++;
+    }while(counter < 100);
+
+
+    //FOR
+    for(int count = 0; count < 100; count++){
+
+        //this condition gets the odd numbers!
+        if(count % 2 == 1){
+            printf("%d ", count);
+        };
+
     };
-    
-    average = accumulator / counter;
-
-    printf("Average: %.2f\n", average);
-
-    if(average >= 5){
-        printf("Approved!");
-    }else{
-        printf("Disapproved!");
-    }
 
 }
+    
