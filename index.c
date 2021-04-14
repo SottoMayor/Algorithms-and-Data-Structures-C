@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /*
-Program Name: Language C -  Arrays: write and display data.
-Goal: Initializing with arrays and learn how to write and display data with them.
-References: https://www.youtube.com/watch?v=Nuhic9XfQrg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=22.
+Program Name: Language C - Knowing strings.
+Goal: Initializing with strings, inputting and displaying strings.
+References: https://www.youtube.com/watch?v=fsfn-jIidNw&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=23.
 
 David Sotto Mayor
 */
@@ -31,35 +31,21 @@ David Sotto Mayor
 
 int main() {
 
-    //Declaring an array
-    int myArray[10]; // In this case an array of integers, and with 10 entries.
+    // Declaring the arrays of string as CHAR.
+    char name[100];
+    char major[100];
 
-    //Populating the array with 0 or arbitrary numbers
-    for(int index = 0; index < 10; index++){
-        myArray[index] = 0;
-    }
+    // Inputting data in them, to read strings we use the combination %[^\n]
 
-    //Display the elements of the array
-    for(int index = 0; index < 10; index++){
-        printf("%d ", myArray[index]);
-    }
+    printf("How is your name? ");
+    scanf("%[^\n]%*c", name);
 
+    printf("What is your major? ");
+    scanf("%[^\n]%*c", major);
 
-    //Now we will input numbers from the keyboard to array
+    //Now, we will display the string. For this, utilize %s
 
-    int array[10], counter;
-
-    for(counter = 0; counter < 10; counter++){
-
-        printf("Input a integer number in our array in the position %d: ", counter + 1);
-        scanf("%d", &array[counter]);
-
-    }
-
-    for(counter = 0; counter < 10; counter++){
-        printf("%d ", array[counter]);
-    }
-
+    printf("Hi! I'm %s and my major is %s.", name, major);
 
 }
     
