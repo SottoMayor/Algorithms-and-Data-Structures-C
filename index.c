@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /*
-Program Name: Language C -  Loops.
-Goal: Know the loops for, while, do-while.
-References: https://www.youtube.com/watch?v=p3pAgdL00qg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=16.
+Program Name: Language C -  Arrays: write and display data.
+Goal: Initializing with arrays and learn how to write and display data with them.
+References: https://www.youtube.com/watch?v=Nuhic9XfQrg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=22.
 
 David Sotto Mayor
 */
@@ -31,45 +31,35 @@ David Sotto Mayor
 
 int main() {
 
-    //Exercise: make a program in c that shows all the odd numbers from 0 to 100
+    //Declaring an array
+    int myArray[10]; // In this case an array of integers, and with 10 entries.
 
-    int counter = 0;
+    //Populating the array with 0 or arbitrary numbers
+    for(int index = 0; index < 10; index++){
+        myArray[index] = 0;
+    }
 
-    //WHILE
-    while(counter < 100){
-
-        //this condition gets the odd numbers!
-        if(counter % 2 == 1){
-            printf("%d ", counter);
-        };
-
-        counter++;
-
-    };
-
-    counter = 0;
-
-    //DO-WHILE
-    do{
-
-        //this condition gets the odd numbers!
-        if(counter % 2 == 1){
-            printf("%d ", counter);
-        };
-
-        counter++;
-    }while(counter < 100);
+    //Display the elements of the array
+    for(int index = 0; index < 10; index++){
+        printf("%d ", myArray[index]);
+    }
 
 
-    //FOR
-    for(int count = 0; count < 100; count++){
+    //Now we will input numbers from the keyboard to array
 
-        //this condition gets the odd numbers!
-        if(count % 2 == 1){
-            printf("%d ", count);
-        };
+    int array[10], counter;
 
-    };
+    for(counter = 0; counter < 10; counter++){
+
+        printf("Input a integer number in our array in the position %d: ", counter + 1);
+        scanf("%d", &array[counter]);
+
+    }
+
+    for(counter = 0; counter < 10; counter++){
+        printf("%d ", array[counter]);
+    }
+
 
 }
     
