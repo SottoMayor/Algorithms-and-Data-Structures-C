@@ -1,12 +1,10 @@
 #include <stdio.h>
-
-// To work with strings, we need add a new include
 #include <string.h>
 
 /*
-Program Name: Language C - String manipulation using native functions.
-Goal: Understanding the handling of strings: strcmp, strcpy, strlen and others.
-References: https://www.youtube.com/watch?v=E1sLEGWb9y8&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=24.
+Program Name: Language C - The Structs.
+Goal: Understanding Structs.
+References: https://www.youtube.com/watch?v=7aBcHxlkp0g&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=25.
 
 David Sotto Mayor
 */
@@ -32,56 +30,57 @@ David Sotto Mayor
     - Write the necessary comments as you write the code.
 */
 
+// Out of the scope of the any function, we are in the 'scope' global! Here we will define our structs (in arbitrary way, of course!)
+
+struct person
+{
+    char name;
+    char surname;
+    float salary;
+};
+
+// Nested structs
+struct major
+{
+    char major;
+    char hierarchy;
+};
+
+struct worker
+{
+    struct major major;
+    char name;
+    char surname;
+    float salary;
+};
+
+
+
+
+
 int main() {
 
-    // Declaring the arrays of string as CHAR.
-    char name[100];
-    char major[100];
-    unsigned stringLength;
+    struct person Fulano, Sicrano;
 
-    // Inputting data in them, to read strings we use the combination %[^\n]
+    // how we can pass data into the struct -> structName.proprety
+    scanf("Name: %[^\n]%*c \n", Fulano.name);
+    Fulano.surname = "Souza";
+    Fulano.salary = 2050;
+    Fulano.salary *= 2;
 
-    printf("How is your name? ");
-    scanf("%[^\n]%*c", name);
-
-    printf("What is your major? ");
-    scanf("%[^\n]%*c", major);
-
-    printf("Hi! I'm %s and my major is %s. \n\n", name, major);
+    //copy structs
+    Sicrano = Fulano;
 
 
-    //We use strlen(param) to get the length of string
+    // Nested structs
 
-    stringLength = strlen(name);
-    printf("The length of the name is %u \n", stringLength);
+    struct worker Beltrano;
 
-    printf("The length of the major is %lu \n", strlen(major));
-
-
-    // When we want to compare strings, we use strcmp(param1, param2). This function returns -1, 0, 1 regarding the param1 and param2
-    // Look the exemple
-
-    if(strcmp(name, major) == 0){
-        printf("The %s and $s are the same string!\n\n", name, major);
-    }else if( strcmp(name, major) == -1 ){
-         printf("The %s comes before the %s.\n\n", name, major);
-    }else{
-         printf("The %s comes after the %s.\n\n", name, major);
-    }
-    // There is also a variation of this function, and is strncmp(param1, param2, n). Here, the functions compares only the Nth
-    // position of the strings!
-
-
-    // To copy a string, we use the strcpy(param1, param2)
-    strcpy(name, major);
-    // There is also a variation of this function, and is strncpy(param1, param2, n). Here, the functions copies only the Nth
-    // position of the string!
-
-
-    // To concatenate, we use strcat(param1, param2)
-    strcat(name, major);
-
-
+    Beltrano.major.major = "Developer";
+    Beltrano.major.hierarchy = "Senior";
+    Beltrano.name = "Beltrano";
+    Beltrano.surname = "Da Silva";
+    Beltrano.salary = 55000;
 
 
 }
