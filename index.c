@@ -2,7 +2,7 @@
 #include <string.h>
 
 /*
-Program Name: Language C - Arrays as parameters in functions and functions that do not return anything.
+Program Name: Language C - Passing array by reference in functions
 Goal: Working with functions and arrays in functions.
 References: https://www.youtube.com/watch?v=ev1Eige8eBo&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=28.
 
@@ -49,33 +49,27 @@ void showArray(float array[], int arraylength){
 }
 
 // Working with array as parameters in functions
-float lowerValue(float array[], int arraylength){
-
-    float smaller = array[0];
+void resetArray(float array[], int arraylength){
 
     for(int index = 0; index < arraylength; index++){
 
-        if(array[index] < smaller){
-            smaller = array[index];
-        }
+        array[index] = 0;
 
     }
-
-
-    return smaller;
 
 }
 
 int main(){
 
     float array[6] = {1.7, 2, 7, 9.8, 10, 1};
-    float smaller;
-
-    smaller = lowerValue(array, 6);
+    float reseted;
 
     showArray(array, 6);
 
-    printf("The lower value among the array values is: %.2f :)", smaller);   
+    resetArray(array, 6);
+
+    printf("Reseted array! :)\n"); 
+    showArray(array, 6); 
 
 }
     
