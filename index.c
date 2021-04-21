@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C - Functions and Type of Variables.
-Goal: Understanding and initializing with functions and type of variables.
-References: https://www.youtube.com/watch?v=fTsaj5-g_DM&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=27.
+Program Name: Language C - Arrays as parameters in functions and functions that do not return anything.
+Goal: Working with functions and arrays in functions.
+References: https://www.youtube.com/watch?v=ev1Eige8eBo&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=28.
 
 David Sotto Mayor
 */
@@ -30,46 +30,52 @@ David Sotto Mayor
     - Write the necessary comments as you write the code.
 */
 
-// Observe this variable, every variable declared outside the scope of any function is a global variable.
-int GLOBAL = 50;
-int sumNumber = 100; // The variable global is every override by the local variable, if the names are equals.
+// We use void in functions that do not return anything.
+void showArray(float array[], int arraylength){
 
-// Functions must be declared according to the types it will return, Ex, int functions will return int and soon...
+    if(arraylength == 0){
+        printf("[ ]\n");
+        return;
+    }
 
-int sum(int a, int b){
+    printf("[ ");
 
-    // Observe this variable, so it is defined only within the sum function. In this way, we call it the local variable.
-    // If we try to call this variable in another function it will give an error, because it only exists inside the sum function.
+    for(int index = 0; index < arraylength - 1; index++){
+        printf("%.2f; ", array[index]);
+    }
 
-    int sumNumber = 0; // This local variable overrides the global variable.
-
-    // We can create a static variables, that keeps in our memory 
-    // but we can just access this in the inside of the function which it was created.
-    static int GLOBALVARFUNC = 100;
-
-    //This function will return a int!
-
-    sumNumber = a + b;
-
-    return sumNumber;
+    printf(" %.2f ]\n ", array[arraylength - 1]);
 
 }
 
+// Working with array as parameters in functions
+float lowerValue(float array[], int arraylength){
 
-//This main function should return a int, and it does that in a implicity way because this is our main function(as the name suggests).
-int main() {
+    float smaller = array[0];
 
-    //This is also a local variables;
-    int part1 = 100;
-    int part2 = 200;
-    int functionSum;
+    for(int index = 0; index < arraylength; index++){
 
-    // Calling a function within the other
+        if(array[index] < smaller){
+            smaller = array[index];
+        }
 
-    functionSum = sum(part1, part2);
+    }
 
-    printf("The value of this sum is %d :)", functionSum + GLOBAL);
 
+    return smaller;
+
+}
+
+int main(){
+
+    float array[6] = {1.7, 2, 7, 9.8, 10, 1};
+    float smaller;
+
+    smaller = lowerValue(array, 6);
+
+    showArray(array, 6);
+
+    printf("The lower value among the array values is: %.2f :)", smaller);   
 
 }
     
