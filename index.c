@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C - The Structs.
-Goal: Understanding Structs.
-References: https://www.youtube.com/watch?v=7aBcHxlkp0g&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=25.
+Program Name: Language C - Functions and Type of Variables.
+Goal: Understanding and initializing with functions and type of variables.
+References: https://www.youtube.com/watch?v=fTsaj5-g_DM&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=27.
 
 David Sotto Mayor
 */
@@ -30,57 +30,45 @@ David Sotto Mayor
     - Write the necessary comments as you write the code.
 */
 
-// Out of the scope of the any function, we are in the 'scope' global! Here we will define our structs (in arbitrary way, of course!)
+// Observe this variable, every variable declared outside the scope of any function is a global variable.
+int GLOBAL = 50;
+int sumNumber = 100; // The variable global is every override by the local variable, if the names are equals.
 
-struct person
-{
-    char name;
-    char surname;
-    float salary;
-};
+// Functions must be declared according to the types it will return, Ex, int functions will return int and soon...
 
-// Nested structs
-struct major
-{
-    char major;
-    char hierarchy;
-};
+int sum(int a, int b){
 
-struct worker
-{
-    struct major major;
-    char name;
-    char surname;
-    float salary;
-};
+    // Observe this variable, so it is defined only within the sum function. In this way, we call it the local variable.
+    // If we try to call this variable in another function it will give an error, because it only exists inside the sum function.
 
+    int sumNumber = 0; // This local variable overrides the global variable.
 
+    // We can create a static variables, that keeps in our memory 
+    // but we can just access this in the inside of the function which it was created.
+    static int GLOBALVARFUNC = 100;
 
+    //This function will return a int!
+
+    sumNumber = a + b;
+
+    return sumNumber;
+
+}
 
 
+//This main function should return a int, and it does that in a implicity way because this is our main function(as the name suggests).
 int main() {
 
-    struct person Fulano, Sicrano;
+    //This is also a local variables;
+    int part1 = 100;
+    int part2 = 200;
+    int functionSum;
 
-    // how we can pass data into the struct -> structName.proprety
-    scanf("Name: %[^\n]%*c \n", Fulano.name);
-    Fulano.surname = "Souza";
-    Fulano.salary = 2050;
-    Fulano.salary *= 2;
+    // Calling a function within the other
 
-    //copy structs
-    Sicrano = Fulano;
+    functionSum = sum(part1, part2);
 
-
-    // Nested structs
-
-    struct worker Beltrano;
-
-    Beltrano.major.major = "Developer";
-    Beltrano.major.hierarchy = "Senior";
-    Beltrano.name = "Beltrano";
-    Beltrano.surname = "Da Silva";
-    Beltrano.salary = 55000;
+    printf("The value of this sum is %d :)", functionSum + GLOBAL);
 
 
 }
