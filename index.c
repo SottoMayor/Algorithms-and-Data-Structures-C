@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C | DSA - The Sequential Search.
-Goal: Working and Understanding the sequencial search.
-References: https://www.youtube.com/watch?v=c9pPJFOE89U&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=31.
+Program Name: Language C | DSA - The Binary Search.
+Goal: Working and Understanding the binary search.
+References: https://www.youtube.com/watch?v=vhLh8B_S5Ms&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=33.
 
 David Sotto Mayor
 */
@@ -36,14 +36,28 @@ typedef int bool;
 #define false 0
 
 
-// Sequential Search
+// Binary Search
+// For this data structure, the vector must be ordered. For now, let's just assume that.
 
-int sequencialSearch( float array[], unsigned arrayLength, unsigned key ){
+int binarySearch( float array[], unsigned arrayLength, unsigned key ){
 
-    for(int index = 0; index < arrayLength; index++){
-        if(array[index] == key){
+    int max, min, mean;
+
+    min = 0;
+    max = arrayLength - 1;
+
+    while( min <= max ){
+
+        mean = (max - min) / 2;
+
+        if(array[mean] > key){
+            min = mean + 1;
+        }else if( array[mean] < key ){
+            max = mean - 1;
+        }else{
             return 1;
         }
+
     }
 
     return 0;
@@ -83,7 +97,7 @@ int main(){
     printf("Enter your search key: ");
     scanf("%f", &searchKey);
 
-    if(sequencialSearch(vet, size, searchKey)) {
+    if(binarySearch(vet, size, searchKey)) {
         printf("True\n");
     }
     else {
