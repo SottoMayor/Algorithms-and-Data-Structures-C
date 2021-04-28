@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C - Passing array by reference in functions
-Goal: Working with functions and arrays in functions.
-References: https://www.youtube.com/watch?v=ev1Eige8eBo&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=28.
+Program Name: Language C | DSA - The Sequential Search.
+Goal: Working and Understanding the sequencial search.
+References: https://www.youtube.com/watch?v=c9pPJFOE89U&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=31.
 
 David Sotto Mayor
 */
@@ -30,7 +30,27 @@ David Sotto Mayor
     - Write the necessary comments as you write the code.
 */
 
-// We use void in functions that do not return anything.
+// setting the boolean options
+typedef int bool;
+#define true 1
+#define false 0
+
+
+// Sequential Search
+
+int sequencialSearch( float array[], unsigned arrayLength, unsigned key ){
+
+    for(int index = 0; index < arrayLength; index++){
+        if(array[index] == key){
+            return 1;
+        }
+    }
+
+    return 0;
+
+}
+
+
 void showArray(float array[], int arraylength){
 
     if(arraylength == 0){
@@ -48,28 +68,27 @@ void showArray(float array[], int arraylength){
 
 }
 
-// Working with array as parameters in functions
-void resetArray(float array[], int arraylength){
-
-    for(int index = 0; index < arraylength; index++){
-
-        array[index] = 0;
-
-    }
-
-}
-
 int main(){
 
-    float array[6] = {1.7, 2, 7, 9.8, 10, 1};
-    float reseted;
+    unsigned size;
+    float searchKey;
 
-    showArray(array, 6);
+    scanf("%u%*c",&size);
+    float vet[size];
 
-    resetArray(array, 6);
+    for(unsigned x = 0; x< size; x++) {
+        scanf("%f%*c",&vet[x]);
+    }
 
-    printf("Reseted array! :)\n"); 
-    showArray(array, 6); 
+    printf("Enter your search key: ");
+    scanf("%f", &searchKey);
+
+    if(sequencialSearch(vet, size, searchKey)) {
+        printf("True\n");
+    }
+    else {
+        printf("False\n");
+    }
 
 }
     
