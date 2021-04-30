@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C | DSA - The Binary Search.
-Goal: Working and Understanding the binary search.
-References: https://www.youtube.com/watch?v=vhLh8B_S5Ms&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=33.
+Program Name: Language C | DSA - The Selection Sort.
+Goal: Working and Understanding the selection Sort.
+References: https://www.youtube.com/watch?v=NKzPnEsuFAk&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=35.
 
 David Sotto Mayor
 */
@@ -39,28 +39,29 @@ typedef int bool;
 // Binary Search
 // For this data structure, the vector must be ordered. For now, let's just assume that.
 
-int binarySearch( float array[], unsigned arrayLength, unsigned key ){
+void selectionSort( float array[], unsigned arrayLength){
 
-    int max, min, mean;
+    unsigned lowest;
+    float auxTemp;
+    int length = arrayLength;
 
-    min = 0;
-    max = arrayLength - 1;
+    for(unsigned index = 0; index < length; index++){
 
-    while( min <= max ){
+        lowest = index;
 
-        mean = (max - min) / 2;
+        for(unsigned rank = index + 1; rank < length; rank++){
 
-        if(array[mean] > key){
-            min = mean + 1;
-        }else if( array[mean] < key ){
-            max = mean - 1;
-        }else{
-            return 1;
+            if(array[rank] < array[lowest]){
+                lowest = rank;
+            }
+
         }
 
-    }
+        auxTemp = array[index];
+        array[index] = array[lowest];
+        array[lowest] = auxTemp;
 
-    return 0;
+    }
 
 }
 
@@ -85,7 +86,6 @@ void showArray(float array[], int arraylength){
 int main(){
 
     unsigned size;
-    float searchKey;
 
     scanf("%u%*c",&size);
     float vet[size];
@@ -94,15 +94,10 @@ int main(){
         scanf("%f%*c",&vet[x]);
     }
 
-    printf("Enter your search key: ");
-    scanf("%f", &searchKey);
 
-    if(binarySearch(vet, size, searchKey)) {
-        printf("True\n");
-    }
-    else {
-        printf("False\n");
-    }
+    selectionSort(vet, size);
+
+    showArray(vet, size);
 
 }
     
