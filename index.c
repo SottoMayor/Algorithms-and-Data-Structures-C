@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C | DSA - The Selection Sort.
-Goal: Working and Understanding the selection Sort.
-References: https://www.youtube.com/watch?v=NKzPnEsuFAk&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=35.
+Program Name: Language C | DSA - The Insertion Sort.
+Goal: Working and Understanding the insertion Sort.
+References: https://www.youtube.com/watch?v=6FUzGE33prk&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=37.
 
 David Sotto Mayor
 */
@@ -36,34 +36,25 @@ typedef int bool;
 #define false 0
 
 
-// Binary Search
-// For this data structure, the vector must be ordered. For now, let's just assume that.
+void insertionSort(unsigned arrayLength, float array[]){
 
-void selectionSort( float array[], unsigned arrayLength){
+    float control;
+    unsigned rank;
 
-    unsigned lowest;
-    float auxTemp;
-    int length = arrayLength;
+    for(unsigned index = 0; index < arrayLength; index++){
 
-    for(unsigned index = 0; index < length; index++){
+        control = array[index];
 
-        lowest = index;
-
-        for(unsigned rank = index + 1; rank < length; rank++){
-
-            if(array[rank] < array[lowest]){
-                lowest = rank;
-            }
-
+        for(rank = index - 1; rank >= 0 && array[rank] > control; rank--){
+            array[rank+1] = array[rank];
         }
 
-        auxTemp = array[index];
-        array[index] = array[lowest];
-        array[lowest] = auxTemp;
+        array[rank+1] = control;
 
     }
 
 }
+
 
 
 void showArray(float array[], int arraylength){
@@ -79,7 +70,7 @@ void showArray(float array[], int arraylength){
         printf("%.2f; ", array[index]);
     }
 
-    printf(" %.2f ]\n ", array[arraylength - 1]);
+    printf("%.2f ]\n ", array[arraylength - 1]);
 
 }
 
@@ -95,7 +86,7 @@ int main(){
     }
 
 
-    selectionSort(vet, size);
+    insertionSort(size, vet);
 
     showArray(vet, size);
 
