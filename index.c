@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C | DSA - The Insertion Sort.
-Goal: Working and Understanding the insertion Sort.
-References: https://www.youtube.com/watch?v=6FUzGE33prk&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=37.
+Program Name: Language C | DSA - Recursion.
+Goal: Understanding the Recursin.
+References: https://www.youtube.com/watch?v=GAw5Lcuzu-Y&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=39.
 
 David Sotto Mayor
 */
@@ -35,23 +35,28 @@ typedef int bool;
 #define true 1
 #define false 0
 
+/*
 
-void insertionSort(unsigned arrayLength, float array[]){
+Recursion is basically a function calling itself until it reaches a stop condition.
 
-    float control;
-    unsigned rank;
+This stop condition is called the base case.
 
-    for(unsigned index = 0; index < arrayLength; index++){
+Recursion is good for elaborating elegant solutions, but it has a high cost related to memory.
+If possible, we should avoid it.
 
-        control = array[index];
+In our exemple, we will use the factorial case!
 
-        for(rank = index - 1; rank >= 0 && array[rank] > control; rank--){
-            array[rank+1] = array[rank];
-        }
+*/
 
-        array[rank+1] = control;
 
+unsigned long fat(int num){
+
+    // This is the case base, the case when the recursion stops!
+    if(num == 1){
+        return 1;
     }
+
+    return num * fat(num - 1);
 
 }
 
@@ -76,19 +81,21 @@ void showArray(float array[], int arraylength){
 
 int main(){
 
-    unsigned size;
+    //unsigned size;
+    unsigned long value;
 
-    scanf("%u%*c",&size);
-    float vet[size];
+    //scanf("%u%*c",&size);
+    //float vet[size];
 
-    for(unsigned x = 0; x< size; x++) {
-        scanf("%f%*c",&vet[x]);
-    }
+    //for(unsigned x = 0; x< size; x++) {
+    //    scanf("%f%*c",&vet[x]);
+    //}
+
+    value = fat(5);
+    printf("%lu", value);
 
 
-    insertionSort(size, vet);
-
-    showArray(vet, size);
+    //showArray(vet, size);
 
 }
     
