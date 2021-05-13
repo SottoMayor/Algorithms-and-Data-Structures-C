@@ -2,9 +2,9 @@
 #include <string.h>
 
 /*
-Program Name: Language C | DSA - Recursion.
-Goal: Understanding the Recursin.
-References: https://www.youtube.com/watch?v=GAw5Lcuzu-Y&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=39.
+Program Name: Language C | DSA - Quick Sort.
+Goal: Working and Understanding the Quick Sort, and experiencing a more optimized version of Quick Sort.
+References: https://www.youtube.com/watch?v=GAw5Lcuzu-Y&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=42.
 
 David Sotto Mayor
 */
@@ -35,28 +35,85 @@ typedef int bool;
 #define true 1
 #define false 0
 
-/*
+// This is the tradicional Quick Sort, we can optimize this method!
+void quickSort(float array[], int start, int end){
 
-Recursion is basically a function calling itself until it reaches a stop condition.
+    int pointer1, pointer2;
+    float pivot, tmp;
 
-This stop condition is called the base case.
+    if(start < end){
+        pivot = array[(start+end)/2];
+        pointer1 = start;
+        pointer2 = end;
 
-Recursion is good for elaborating elegant solutions, but it has a high cost related to memory.
-If possible, we should avoid it.
+        while (pointer1 <= pointer2){
 
-In our exemple, we will use the factorial case!
+          while(array[pointer1] < pivot){
+                pointer1++;
+            }
+            while(array[pointer2] > pivot){
+                pointer2--;
+            }
 
-*/
+            if(pointer1 <= pointer2){
+                tmp = array[pointer1];
+                array[pointer1] = array[pointer2];
+                array[pointer2] = tmp;
+                pointer1++;
+                pointer2--;
+            }
 
+        }
+        
+        
+        quickSort(array, start, pointer2);
+        quickSort(array, pointer1, end);
 
-unsigned long fat(int num){
-
-    // This is the case base, the case when the recursion stops!
-    if(num == 1){
-        return 1;
     }
 
-    return num * fat(num - 1);
+    printf("Finished!\n");
+
+}
+
+
+void optimizedQuickSort(float array[], int start, int end){
+
+    int pointer1, pointer2;
+    float pivot, tmp;
+
+    while( start < end ){
+        pivot = array[(start + end)/2];
+        pointer1 = start;
+        pointer2 = end;
+
+        while( pointer1 <= pointer2 ){
+
+            while(array[pointer1] < pivot){
+                pointer1++;
+            }
+            while(array[pointer2] > pivot){
+                pointer2--;
+            }
+
+            if(pointer1 <= pointer2){
+                tmp = array[pointer1];
+                array[pointer1] = array[pointer2];
+                array[pointer2] = tmp;
+                pointer1++;
+                pointer2--;
+            }
+
+        }
+
+        if(pointer2 < ((start + end)/2)){
+            optimizedQuickSort(array, start, pointer2);
+            start = pointer1;
+        }else{
+            optimizedQuickSort(array, pointer1, end);
+            end = pointer2;
+        }
+
+    }
 
 }
 
@@ -79,23 +136,24 @@ void showArray(float array[], int arraylength){
 
 }
 
+
 int main(){
 
-    //unsigned size;
-    unsigned long value;
+    unsigned size;
 
-    //scanf("%u%*c",&size);
-    //float vet[size];
+    scanf("%u%*c",&size);
+    float vet[size];
 
-    //for(unsigned x = 0; x< size; x++) {
-    //    scanf("%f%*c",&vet[x]);
-    //}
-
-    value = fat(5);
-    printf("%lu", value);
+    for(unsigned x = 0; x< size; x++) {
+        scanf("%f%*c",&vet[x]);
+    }
 
 
-    //showArray(vet, size);
+    showArray(vet, size);
+
+    optimizedQuickSort(vet, 0, size - 1);
+
+    showArray(vet, size);
 
 }
     
