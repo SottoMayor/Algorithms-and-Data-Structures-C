@@ -2,8 +2,8 @@
 #include <string.h>
 
 /*
-Program Name: Language C | DSA - Quick Sort.
-Goal: Working and Understanding the Quick Sort, and experiencing a more optimized version of Quick Sort.
+Program Name: Language C | DSA - Merge Sort.
+Goal: Working and Understanding the Merge Sort, and working with Merge technique.
 References: https://www.youtube.com/watch?v=GAw5Lcuzu-Y&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=42.
 
 David Sotto Mayor
@@ -35,86 +35,50 @@ typedef int bool;
 #define true 1
 #define false 0
 
-// This is the tradicional Quick Sort, we can optimize this method!
-void quickSort(float array[], int start, int end){
-
-    int pointer1, pointer2;
-    float pivot, tmp;
+void mergeSort(float array[], float arrayAux[], int start, int end){
+    int pointer1, pointer2, pointer3, middle;
 
     if(start < end){
-        pivot = array[(start+end)/2];
+        middle = (start + end) / 2;
+        mergeSort(array, arrayAux, start, middle);
+        mergeSort(array, arrayAux, middle + 1, end);
+
+        // Now, the merge technique
+
         pointer1 = start;
-        pointer2 = end;
+        pointer2 = middle + 1;
+        pointer3 = start;
 
-        while (pointer1 <= pointer2){
-
-          while(array[pointer1] < pivot){
+        while((pointer1 <= middle) && (pointer2 <= end)){
+            if(array[pointer1] < array[pointer2]){
+                arrayAux[pointer3] = array[pointer1];
                 pointer1++;
+            }else{
+                arrayAux[pointer3] = array[pointer2];
+                pointer2++;
             }
-            while(array[pointer2] > pivot){
-                pointer2--;
-            }
-
-            if(pointer1 <= pointer2){
-                tmp = array[pointer1];
-                array[pointer1] = array[pointer2];
-                array[pointer2] = tmp;
-                pointer1++;
-                pointer2--;
-            }
-
-        }
-        
-        
-        quickSort(array, start, pointer2);
-        quickSort(array, pointer1, end);
-
-    }
-
-    printf("Finished!\n");
-
-}
-
-
-void optimizedQuickSort(float array[], int start, int end){
-
-    int pointer1, pointer2;
-    float pivot, tmp;
-
-    while( start < end ){
-        pivot = array[(start + end)/2];
-        pointer1 = start;
-        pointer2 = end;
-
-        while( pointer1 <= pointer2 ){
-
-            while(array[pointer1] < pivot){
-                pointer1++;
-            }
-            while(array[pointer2] > pivot){
-                pointer2--;
-            }
-
-            if(pointer1 <= pointer2){
-                tmp = array[pointer1];
-                array[pointer1] = array[pointer2];
-                array[pointer2] = tmp;
-                pointer1++;
-                pointer2--;
-            }
-
+            pointer3++;
         }
 
-        if(pointer2 < ((start + end)/2)){
-            optimizedQuickSort(array, start, pointer2);
-            start = pointer1;
-        }else{
-            optimizedQuickSort(array, pointer1, end);
-            end = pointer2;
+        while(pointer1 <= middle){
+            arrayAux[pointer3] = array[pointer1];
+            pointer1++;
+            pointer3++;
+        }
+
+        while(pointer2 <= end){
+            arrayAux[pointer3] = array[pointer2];
+            pointer2++;
+            pointer3++;
+        }
+    
+
+        // This step pass the ordained arrayAux to our aaray
+        for(pointer3 = start; pointer3 <= end; pointer3++){
+            array[pointer3] = arrayAux[pointer3];
         }
 
     }
-
 }
 
 
@@ -148,10 +112,9 @@ int main(){
         scanf("%f%*c",&vet[x]);
     }
 
+    float vetAux[size];
 
-    showArray(vet, size);
-
-    optimizedQuickSort(vet, 0, size - 1);
+    mergeSort(vet, vetAux, 0, size - 1);
 
     showArray(vet, size);
 
