@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Dynamic Linked List and Node type.
-Goal: Working with Linked List, Nodes, Initializing and Inserting elements into the Linked List.
-References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=61.
+Program Name: Language C | DSA - Function to search names into Linked List.
+Goal: Working with Linked List together with functions.
+References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=62.
 
 David Sotto Mayor
 */
@@ -94,12 +94,32 @@ void showLinkedList(linkedList *pList){
     }
 }
 
+//Function to search an element in the Linked List
+
+student* searchDataByName(linkedList *pList, char *key){
+    node *aux;
+    aux = pList->first;
+
+    while(aux){
+
+        if(!strcmp(aux->data.name, key)){
+            return &(aux->data);
+        }
+        aux = aux->next;
+    }
+
+    return NULL;
+
+}
+
 
 int main(){
 
     
     student someStudent;
     linkedList studentList;
+
+    student *pStudent;
 
     initLinkedList(&studentList);
 
@@ -123,6 +143,12 @@ int main(){
 
     showLinkedList(&studentList);
 
+    pStudent = searchDataByName(&studentList, "David");
+    if(pStudent){
+        printf("The student was found!\n");
+    }else{
+        printf("Student not found!\n");
+    }
 
 }
     
