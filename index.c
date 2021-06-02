@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Function to search names into Linked List.
+Program Name: Language C | DSA - Function to remove structures by name into Linked List.
 Goal: Working with Linked List together with functions.
-References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=62.
+References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=63.
 
 David Sotto Mayor
 */
@@ -112,6 +112,41 @@ student* searchDataByName(linkedList *pList, char *key){
 
 }
 
+//Function to remove an element in the Linked List
+
+student* removeDataByName(linkedList *pList, char *key){
+    node *aux, *tmp;
+
+    if(pList->first){
+
+        if(!strcmp(pList->first->data.name, key)){
+            tmp = pList->first;
+            pList->first = tmp->next;
+            free(tmp);
+            return 1;
+        }
+
+        aux = pList->first;
+
+        while(aux->next){
+
+            if(!strcmp(aux->next->data.name, key)){
+                tmp = aux->next;
+                aux->next = tmp->next;
+                free(tmp);
+                return 1;
+
+            }
+            aux = aux->next;
+        }
+
+    }
+
+    return 0;
+
+}
+
+
 
 int main(){
 
@@ -119,7 +154,7 @@ int main(){
     student someStudent;
     linkedList studentList;
 
-    student *pStudent;
+    student *pStudent, *removeStudent;
 
     initLinkedList(&studentList);
 
@@ -145,10 +180,18 @@ int main(){
 
     pStudent = searchDataByName(&studentList, "David");
     if(pStudent){
-        printf("The student was found!\n");
+        printf("The student was found!\n\n");
     }else{
-        printf("Student not found!\n");
+        printf("Student not found!\n\n");
     }
 
+    removeStudent = removeDataByName(&studentList, "Fulano");
+    if(removeStudent){
+        printf("Student was successfully removed!\n\n");
+    }else{
+        printf("Student not found!\n\n");
+    }
+
+    showLinkedList(&studentList);
 }
     
