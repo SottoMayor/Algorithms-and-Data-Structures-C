@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Merge Sort.
-Goal: Working and Understanding the Merge Sort, and working with Merge technique.
-References: https://www.youtube.com/watch?v=GAw5Lcuzu-Y&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=42.
+Program Name: Language C | DSA - Dynamic Linked List and Node type.
+Goal: Working with Linked List, Nodes, Initializing and Inserting elements into the Linked List.
+References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=61.
 
 David Sotto Mayor
 */
@@ -35,88 +36,93 @@ typedef int bool;
 #define true 1
 #define false 0
 
-void mergeSort(float array[], float arrayAux[], int start, int end){
-    int pointer1, pointer2, pointer3, middle;
+// Creating a struct
+typedef struct student{
+    char name[30];
+    char course[30];
+    float coefficient;
+}student;
 
-    if(start < end){
-        middle = (start + end) / 2;
-        mergeSort(array, arrayAux, start, middle);
-        mergeSort(array, arrayAux, middle + 1, end);
-
-        // Now, the merge technique
-
-        pointer1 = start;
-        pointer2 = middle + 1;
-        pointer3 = start;
-
-        while((pointer1 <= middle) && (pointer2 <= end)){
-            if(array[pointer1] < array[pointer2]){
-                arrayAux[pointer3] = array[pointer1];
-                pointer1++;
-            }else{
-                arrayAux[pointer3] = array[pointer2];
-                pointer2++;
-            }
-            pointer3++;
-        }
-
-        while(pointer1 <= middle){
-            arrayAux[pointer3] = array[pointer1];
-            pointer1++;
-            pointer3++;
-        }
-
-        while(pointer2 <= end){
-            arrayAux[pointer3] = array[pointer2];
-            pointer2++;
-            pointer3++;
-        }
-    
-
-        // This step pass the ordained arrayAux to our aaray
-        for(pointer3 = start; pointer3 <= end; pointer3++){
-            array[pointer3] = arrayAux[pointer3];
-        }
-
-    }
+// Show the struct student data
+void showStudent(student studentData){
+    printf("The student name: %s\n", studentData.name);
+    printf("The student course: %s\n", studentData.course);
+    printf("The student coefficient: %.2f\n", studentData.coefficient);
 }
 
+// Creating the Node of the Linked List
+typedef struct node{
+    student data;
+    struct node *next;
+}node;
 
+// Creating The Linked List
+typedef struct linkedList{
+    node *first;
+}linkedList;
 
-void showArray(float array[], int arraylength){
+// Initializing the Linked List
+void initLinkedList(linkedList *pList){
+    pList->first = NULL;
+}
 
-    if(arraylength == 0){
-        printf("[ ]\n");
-        return;
+// Inserting data into Linked List
+void insertData(linkedList *pList, student *studentData){
+    // Creating a pointer of type (struct) node
+    node *aux;
+
+    // Getting some space in Heap
+    aux = (node*) malloc (sizeof(node));
+    // Copping the adrress of studentData to (struct student) data in (struct) node
+    aux->data = *studentData;
+    // Passing the address of the first element of the LinkedList to the next node adress
+    aux->next = pList->first;
+    // Att the the address of the first element with the adress of aux
+    pList->first = aux;
+
+}
+
+//Show the LinkedList
+void showLinkedList(linkedList *pList){
+    node *aux;
+
+    aux = pList->first;
+    while(aux){
+        showStudent(aux->data);
+        printf("\n");
+        aux = aux->next;
     }
-
-    printf("[ ");
-
-    for(int index = 0; index < arraylength - 1; index++){
-        printf("%.2f; ", array[index]);
-    }
-
-    printf("%.2f ]\n ", array[arraylength - 1]);
-
 }
 
 
 int main(){
 
-    unsigned size;
+    
+    student someStudent;
+    linkedList studentList;
 
-    scanf("%u%*c",&size);
-    float vet[size];
+    initLinkedList(&studentList);
 
-    for(unsigned x = 0; x< size; x++) {
-        scanf("%f%*c",&vet[x]);
-    }
+    strcpy(someStudent.name, "David");
+    strcpy(someStudent.course, "Mathematics");
+    someStudent.coefficient = 10;
 
-    float vetAux[size];
+    insertData(&studentList, &someStudent);
 
-    mergeSort(vet, vetAux, 0, size - 1);
+    strcpy(someStudent.name, "Fulano");
+    strcpy(someStudent.course, "Engineering");
+    someStudent.coefficient = 8.5;
 
-    showArray(vet, size);
+    insertData(&studentList, &someStudent);
+
+    strcpy(someStudent.name, "Ana");
+    strcpy(someStudent.course, "Economy");
+    someStudent.coefficient = 9;
+
+    insertData(&studentList, &someStudent);
+
+    showLinkedList(&studentList);
+
 
 }
     
