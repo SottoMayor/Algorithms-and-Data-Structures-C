@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Function to remove structures by name into Linked List.
+Program Name: Language C | DSA - Function to remove structures at the end of the Linked List.
 Goal: Working with Linked List together with functions.
-References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=63.
+References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=66.
 
 David Sotto Mayor
 */
@@ -59,15 +59,17 @@ typedef struct node{
 // Creating The Linked List
 typedef struct linkedList{
     node *first;
+    node *last;
 }linkedList;
 
 // Initializing the Linked List
 void initLinkedList(linkedList *pList){
     pList->first = NULL;
+    pList->last = NULL;
 }
 
-// Inserting data into Linked List
-void insertData(linkedList *pList, student *studentData){
+// Inserting data at the begining into Linked List
+void insertDataBegin(linkedList *pList, student *studentData){
     // Creating a pointer of type (struct) node
     node *aux;
 
@@ -77,6 +79,36 @@ void insertData(linkedList *pList, student *studentData){
     aux->data = *studentData;
     // Passing the address of the first element of the LinkedList to the next node adress
     aux->next = pList->first;
+
+    // Checking if the address of the first node is NULL
+    if(pList->first == NULL){
+        pList->last = aux;
+    }
+    // Att the the address of the first element with the adress of aux
+    pList->first = aux;
+
+}
+
+// Inserting data at the end into Linked List
+void insertDataEnd(linkedList *pList, student *studentData){
+    // Creating a pointer of type (struct) node
+    node *aux;
+
+    // Getting some space in Heap
+    aux = (node*) malloc (sizeof(node));
+    // Copping the adrress of studentData to (struct student) data in (struct) node
+    aux->data = *studentData;
+    // Setting the address of the last element of the LinkedList as NULL
+    aux->next = NULL;
+
+    // Inserting if the size of the Linked List is grather than 1
+    if(pList->last){
+        // Linked List grather than 1
+        pList->last->next = aux;
+    }else{
+        pList->first = aux;
+    }
+
     // Att the the address of the first element with the adress of aux
     pList->first = aux;
 
@@ -122,6 +154,9 @@ student* removeDataByName(linkedList *pList, char *key){
         if(!strcmp(pList->first->data.name, key)){
             tmp = pList->first;
             pList->first = tmp->next;
+            if(pList->first == NULL){
+                pList->last = NULL;
+            }
             free(tmp);
             return 1;
         }
@@ -132,6 +167,9 @@ student* removeDataByName(linkedList *pList, char *key){
 
             if(!strcmp(aux->next->data.name, key)){
                 tmp = aux->next;
+                if(tmp == pList->last){
+                    pList->last = aux;
+                }
                 aux->next = tmp->next;
                 free(tmp);
                 return 1;
@@ -162,19 +200,19 @@ int main(){
     strcpy(someStudent.course, "Mathematics");
     someStudent.coefficient = 10;
 
-    insertData(&studentList, &someStudent);
+    insertDataBegin(&studentList, &someStudent);
 
     strcpy(someStudent.name, "Fulano");
     strcpy(someStudent.course, "Engineering");
     someStudent.coefficient = 8.5;
 
-    insertData(&studentList, &someStudent);
+    insertDataBegin(&studentList, &someStudent);
 
     strcpy(someStudent.name, "Ana");
     strcpy(someStudent.course, "Economy");
     someStudent.coefficient = 9;
 
-    insertData(&studentList, &someStudent);
+    insertDataBegin(&studentList, &someStudent);
 
     showLinkedList(&studentList);
 
@@ -191,6 +229,14 @@ int main(){
     }else{
         printf("Student not found!\n\n");
     }
+
+    showLinkedList(&studentList);
+
+    strcpy(someStudent.name, "Fulano");
+    strcpy(someStudent.course, "Engineering");
+    someStudent.coefficient = 8.5;
+
+    insertDataEnd(&studentList, &someStudent);
 
     showLinkedList(&studentList);
 }
