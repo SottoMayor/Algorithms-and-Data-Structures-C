@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Function to remove structures at the end of the Linked List.
+Program Name: Language C | DSA - Function to remove structures at the end and beginig of the Linked List.
 Goal: Working with Linked List together with functions.
-References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=66.
+References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=67.
 
 David Sotto Mayor
 */
@@ -114,6 +114,8 @@ void insertDataEnd(linkedList *pList, student *studentData){
 
 }
 
+
+
 //Show the LinkedList
 void showLinkedList(linkedList *pList){
     node *aux;
@@ -144,7 +146,7 @@ student* searchDataByName(linkedList *pList, char *key){
 
 }
 
-//Function to remove an element in the Linked List
+//Function to remove an element by name in the Linked List
 
 student* removeDataByName(linkedList *pList, char *key){
     node *aux, *tmp;
@@ -184,6 +186,49 @@ student* removeDataByName(linkedList *pList, char *key){
 
 }
 
+//Function to remove an element at the begining of the Linked List
+
+int removeDataBegin(linkedList *pList, student *result){
+    node *tmp;
+    tmp = pList->first;
+    if(tmp){
+        pList->first = tmp->next;
+        if(pList->first == NULL){
+            pList->last = NULL;
+        }
+        *result = tmp->data;
+        free(tmp);
+        return 1;
+    }
+    return 0;
+}
+
+//Function to remove an element at the end of the Linked List
+
+int removeDataEnd(linkedList *pList, student *result){
+    node *aux, *tmp;
+    aux = pList->first;
+    if(aux){
+        // Only one element in the Linked List
+        if(aux == pList->last){
+            pList->last=NULL;
+            pList->first=NULL;
+            *result = aux->data;
+            free(aux);
+        }else{
+            while(aux->next != pList->last){
+                aux = aux->next;
+            }
+            tmp = aux->next;
+            aux->next = NULL;
+            pList->last = aux;
+            *result = tmp->data;
+            free(tmp);
+        }
+        return 1;
+    }
+    return 0;
+}
 
 
 int main(){
