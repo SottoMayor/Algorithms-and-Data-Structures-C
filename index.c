@@ -3,10 +3,9 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Queues.
-Goal: Working with Queues.
-References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=67.
-
+Program Name: Language C | DSA - Stacks.
+Goal: Working with Stacks.
+References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=69.
 David Sotto Mayor
 */
 
@@ -59,16 +58,14 @@ typedef struct node{
 // Creating The Linked List
 typedef struct linkedList{
     node *first;
-    node *last;
 }linkedList;
 
 // Initializing the Linked List
 void initLinkedList(linkedList *pList){
     pList->first = NULL;
-    pList->last = NULL;
 }
 
-// Inserting data at the end into Linked List (Queue insertion)
+// Inserting data at the begining into Linked List (Stack insertion)
 void insertData(linkedList *pList, student *studentData){
     // Creating a pointer of type (struct) node
     node *aux;
@@ -77,21 +74,13 @@ void insertData(linkedList *pList, student *studentData){
     aux = (node*) malloc (sizeof(node));
     // Copping the adrress of studentData to (struct student) data in (struct) node
     aux->data = *studentData;
-    // Setting the address of the last element of the LinkedList as NULL
-    aux->next = NULL;
-
-    // Inserting if the size of the Linked List is grather than 1
-    if(pList->last){
-        // Linked List grather than 1
-        pList->last->next = aux;
-    }else{
-        pList->first = aux;
-    }
-
+    // Passing the address of the first element of the LinkedList to the next node adress
+    aux->next = pList->first;
     // Att the the address of the first element with the adress of aux
-    pList->last = aux;
+    pList->first = aux;
 
 }
+
 
 //Show the LinkedList
 void showLinkedList(linkedList *pList){
@@ -123,17 +112,13 @@ student* searchDataByName(linkedList *pList, char *key){
 
 }
 
-
-//Function to remove an element at the begining of the Linked List (Queue removal)
+//Function to remove an element at the begining of the Linked List (Stack removal)
 
 int removeData(linkedList *pList, student *result){
     node *tmp;
     tmp = pList->first;
     if(tmp){
         pList->first = tmp->next;
-        if(pList->first == NULL){
-            pList->last = NULL;
-        }
         *result = tmp->data;
         free(tmp);
         return 1;
@@ -172,6 +157,7 @@ int main(){
 
     showLinkedList(&studentList);
 
+    
     pStudent = searchDataByName(&studentList, "David");
     if(pStudent){
         printf("The student was found!\n\n");
@@ -179,6 +165,10 @@ int main(){
         printf("Student not found!\n\n");
     }
 
-    
+    printf("Removing a student!\n\n");
+
+    removeData(&studentList, &someStudent);
+
+    showLinkedList(&studentList);
+
 }
-    
