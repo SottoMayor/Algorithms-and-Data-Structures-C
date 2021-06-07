@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Function to remove structures at the end and beginig of the Linked List.
-Goal: Working with Linked List together with functions.
+Program Name: Language C | DSA - Fixing a little bug in insertion Data at the begin.
+Goal: Fix a bug.
 References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=67.
 
 David Sotto Mayor
@@ -110,7 +110,7 @@ void insertDataEnd(linkedList *pList, student *studentData){
     }
 
     // Att the the address of the first element with the adress of aux
-    pList->first = aux;
+    pList->last = aux;
 
 }
 
