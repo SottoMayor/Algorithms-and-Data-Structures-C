@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 /*
-Program Name: Language C | DSA - Fixing a little bug in insertion Data at the begin.
-Goal: Fix a bug.
+Program Name: Language C | DSA - Queues.
+Goal: Working with Queues.
 References: https://www.youtube.com/watch?v=Xhqtlf9AHxg&list=PLgMem-KiO8qFk4S62AjdYdzSkAIsxVmFq&index=67.
 
 David Sotto Mayor
@@ -68,29 +68,8 @@ void initLinkedList(linkedList *pList){
     pList->last = NULL;
 }
 
-// Inserting data at the begining into Linked List
-void insertDataBegin(linkedList *pList, student *studentData){
-    // Creating a pointer of type (struct) node
-    node *aux;
-
-    // Getting some space in Heap
-    aux = (node*) malloc (sizeof(node));
-    // Copping the adrress of studentData to (struct student) data in (struct) node
-    aux->data = *studentData;
-    // Passing the address of the first element of the LinkedList to the next node adress
-    aux->next = pList->first;
-
-    // Checking if the address of the first node is NULL
-    if(pList->first == NULL){
-        pList->last = aux;
-    }
-    // Att the the address of the first element with the adress of aux
-    pList->first = aux;
-
-}
-
-// Inserting data at the end into Linked List
-void insertDataEnd(linkedList *pList, student *studentData){
+// Inserting data at the end into Linked List (Queue insertion)
+void insertData(linkedList *pList, student *studentData){
     // Creating a pointer of type (struct) node
     node *aux;
 
@@ -113,8 +92,6 @@ void insertDataEnd(linkedList *pList, student *studentData){
     pList->last = aux;
 
 }
-
-
 
 //Show the LinkedList
 void showLinkedList(linkedList *pList){
@@ -146,49 +123,10 @@ student* searchDataByName(linkedList *pList, char *key){
 
 }
 
-//Function to remove an element by name in the Linked List
 
-student* removeDataByName(linkedList *pList, char *key){
-    node *aux, *tmp;
+//Function to remove an element at the begining of the Linked List (Queue removal)
 
-    if(pList->first){
-
-        if(!strcmp(pList->first->data.name, key)){
-            tmp = pList->first;
-            pList->first = tmp->next;
-            if(pList->first == NULL){
-                pList->last = NULL;
-            }
-            free(tmp);
-            return 1;
-        }
-
-        aux = pList->first;
-
-        while(aux->next){
-
-            if(!strcmp(aux->next->data.name, key)){
-                tmp = aux->next;
-                if(tmp == pList->last){
-                    pList->last = aux;
-                }
-                aux->next = tmp->next;
-                free(tmp);
-                return 1;
-
-            }
-            aux = aux->next;
-        }
-
-    }
-
-    return 0;
-
-}
-
-//Function to remove an element at the begining of the Linked List
-
-int removeDataBegin(linkedList *pList, student *result){
+int removeData(linkedList *pList, student *result){
     node *tmp;
     tmp = pList->first;
     if(tmp){
@@ -198,33 +136,6 @@ int removeDataBegin(linkedList *pList, student *result){
         }
         *result = tmp->data;
         free(tmp);
-        return 1;
-    }
-    return 0;
-}
-
-//Function to remove an element at the end of the Linked List
-
-int removeDataEnd(linkedList *pList, student *result){
-    node *aux, *tmp;
-    aux = pList->first;
-    if(aux){
-        // Only one element in the Linked List
-        if(aux == pList->last){
-            pList->last=NULL;
-            pList->first=NULL;
-            *result = aux->data;
-            free(aux);
-        }else{
-            while(aux->next != pList->last){
-                aux = aux->next;
-            }
-            tmp = aux->next;
-            aux->next = NULL;
-            pList->last = aux;
-            *result = tmp->data;
-            free(tmp);
-        }
         return 1;
     }
     return 0;
@@ -245,19 +156,19 @@ int main(){
     strcpy(someStudent.course, "Mathematics");
     someStudent.coefficient = 10;
 
-    insertDataBegin(&studentList, &someStudent);
+    insertData(&studentList, &someStudent);
 
     strcpy(someStudent.name, "Fulano");
     strcpy(someStudent.course, "Engineering");
     someStudent.coefficient = 8.5;
 
-    insertDataBegin(&studentList, &someStudent);
+    insertData(&studentList, &someStudent);
 
     strcpy(someStudent.name, "Ana");
     strcpy(someStudent.course, "Economy");
     someStudent.coefficient = 9;
 
-    insertDataBegin(&studentList, &someStudent);
+    insertData(&studentList, &someStudent);
 
     showLinkedList(&studentList);
 
@@ -268,21 +179,6 @@ int main(){
         printf("Student not found!\n\n");
     }
 
-    removeStudent = removeDataByName(&studentList, "Fulano");
-    if(removeStudent){
-        printf("Student was successfully removed!\n\n");
-    }else{
-        printf("Student not found!\n\n");
-    }
-
-    showLinkedList(&studentList);
-
-    strcpy(someStudent.name, "Fulano");
-    strcpy(someStudent.course, "Engineering");
-    someStudent.coefficient = 8.5;
-
-    insertDataEnd(&studentList, &someStudent);
-
-    showLinkedList(&studentList);
+    
 }
     
